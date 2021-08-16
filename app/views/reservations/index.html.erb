@@ -1,0 +1,50 @@
+<h2>予約済みルーム一覧</h2>
+    <% if flash.notice %>
+      <p class="notice"><%= flash.notice %></p>
+    <% end %>
+
+ <table>
+      <thead>
+        <tr>
+          <th>ルーム写真</th>
+          <th>ルーム名</th>
+          <th>住所</th>
+          <th>料金</th>
+          <th>紹介</th>
+          <th>開始日</th>
+          <th>終了日</th>
+          <th>人数</th>
+          <th>予約確定日時</th>
+          <th>x</th>
+        </tr>
+      </thead>
+
+      <tbody>
+       <tr>
+        <% @reservations.each do |reservation| %>
+          <% @rooms.each do |room| %>
+         <td>
+            <% room.images.each do |image| %>  
+            <%= image_tag image.image_url.url %> 
+            <% end %>
+         </td>    
+         <td><%= room.name %></td>
+         <td><%= room.address %></td>
+         <td><%= (room.price*reservation.people)*(reservation.end_date.to_date - reservation.start_date.to_date).to_i %></td>
+         <td><%= room.introduction %></td>
+
+         <td><%= reservation.start_date.to_s(:datetime_jp) %></td>
+         <td><%= reservation.end_date.to_s(:datetime_jp) %></td>
+         <td><%= reservation.people %></td>
+         <td><%= reservation.created_at.to_s(:datetime_jp) %></td>
+         <td>
+            <%= link_to "削除", reservation, method: :delete, data: { confirm: "本当に削除しますか？" } %>
+         </td>
+        </tr>
+        <% end %>
+        <% end %>
+      </tbody>
+    </table>
+
+    <p><%= link_to "home", :user_session %></p> 
+    

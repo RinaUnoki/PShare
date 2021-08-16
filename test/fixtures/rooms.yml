@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  title: MyString
+  body: MyText
+  image_id: MyString
+  price: 1
+  adress: MyString
+  StartDate: 2021-08-13
+  EndDate: 2021-08-13
+
+two:
+  user_id: 1
+  title: MyString
+  body: MyText
+  image_id: MyString
+  price: 1
+  adress: MyString
+  StartDate: 2021-08-13
+  EndDate: 2021-08-13
