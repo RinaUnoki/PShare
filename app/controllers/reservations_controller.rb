@@ -12,27 +12,29 @@ class ReservationsController < ApplicationController
 	 end
   
  def back
-		@reservation = Reservation.new(@attr)
+		@reservation = Reservation.new(reservation_params)
 		render :new
 	end
 	
 	def complete
-		Reservation.create!(@attr)
+		Reservation.create!(@reservation)
 	end
 
   def show
-   @room = Room.find_by(room_params)
-   @reservation = Reservation.find_by(reservation_params)
+   @room = Room.find_by(@room_params)
+   @reservation = Reservation.find_by(@reservation_params)
     if @reservation.invalid?
 			 render :new
 		 end
   end
   
+  
  def create
    @reservation = Reservation.new(reservation_params)
+   redirect_to "/reservations/show"
    if @reservation.save
    flash[:notice] = "予約完了しました。"
-   redirect_to "/home"
+   redirect_to "/"
    else
    render "new"
    end
@@ -48,7 +50,7 @@ class ReservationsController < ApplicationController
  private
 
   def reservation_params
-    params.require("reservation").permit(:StartDate, :EndDate, :person_num)
+    params.permit(:StartDate, :EndDate, :person_num)
   end
   
   def room_params
