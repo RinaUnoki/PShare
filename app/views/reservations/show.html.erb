@@ -54,7 +54,7 @@
 	        　　<%= form.submit '入力画面に戻る' %>
           　　<% end %>
           
-          　　<%= form_for @reservation, method: :post, url: "/" do |form| %>
+          　　<%= form_for @reservation, method: :post, url: resrevations_path do |form| %>
 	        　　<%= form.hidden_field :StartDate %>
 	        　　<%= form.hidden_field :EndDate %>
 	        　　<%= form.hidden_field :person_num %>

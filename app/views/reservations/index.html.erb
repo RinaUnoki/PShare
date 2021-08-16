@@ -1,4 +1,4 @@
-<h2>予約済みルーム一覧</h2>
+<h2>予約済ルーム一覧</h2>
     <% if flash.notice %>
       <p class="notice"><%= flash.notice %></p>
     <% end %>
@@ -24,24 +24,22 @@
         <% @reservations.each do |reservation| %>
           <% @rooms.each do |room| %>
          <td>
-            <% room.images.each do |image| %>  
-            <%= image_tag image.image_url.url %> 
+            <%= attachment_image_tag room, :image %>
             <% end %>
          </td>    
-         <td><%= room.name %></td>
-         <td><%= room.address %></td>
-         <td><%= (room.price*reservation.people)*(reservation.end_date.to_date - reservation.start_date.to_date).to_i %></td>
-         <td><%= room.introduction %></td>
+         <td><%= @room.name %></td>
+         <td><%= @room.adress %></td>
+         <td><%= (@room.price*@reservation.person_num)*(@reservation.EndDate.to_date - @reservation.StartDate.to_date).to_i %></td>
+         <td><%= @room.body %></td>
 
-         <td><%= reservation.start_date.to_s(:datetime_jp) %></td>
-         <td><%= reservation.end_date.to_s(:datetime_jp) %></td>
-         <td><%= reservation.people %></td>
-         <td><%= reservation.created_at.to_s(:datetime_jp) %></td>
+         <td><%= @reservation.StartDate.to_s(:datetime_jp) %></td>
+         <td><%= @reservation.EndDate.to_s(:datetime_jp) %></td>
+         <td><%= @reservation.person_num %></td>
+         <td><%= @reservation.created_at.to_s(:datetime_jp) %></td>
          <td>
             <%= link_to "削除", reservation, method: :delete, data: { confirm: "本当に削除しますか？" } %>
          </td>
         </tr>
-        <% end %>
         <% end %>
       </tbody>
     </table>

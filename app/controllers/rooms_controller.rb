@@ -22,10 +22,6 @@ class RoomsController < ApplicationController
       render :new
     end
   end
-  
-  def reserve
-
-  end
 
   def edit
     @room = Room.find(params[:id])
