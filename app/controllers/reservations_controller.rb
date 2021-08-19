@@ -8,37 +8,25 @@ class ReservationsController < ApplicationController
 
   def new
    @reservation = Reservation.new
-   @room = Room.find_by(params[:id])
 	 end
-  
- def back
-		@reservation = Reservation.new(reservation_params)
-		render :new
-	end
 	
 	def complete
 		Reservation.create!(@reservation)
 	end
+	
+	def create
+   @reservation = Reservation.new(reservation_params)
+   @room = Room.find_by(params[:room_id])
+   render "/reservations/show"
+ end
 
   def show
-   @room = Room.find_by(@room_params)
-   @reservation = Reservation.find_by(@reservation_params)
     if @reservation.invalid?
 			 render :new
 		 end
   end
   
   
- def create
-   @reservation = Reservation.new(reservation_params)
-   redirect_to "/reservations/show"
-   if @reservation.save
-   flash[:notice] = "予約完了しました。"
-   redirect_to "/"
-   else
-   render "new"
-   end
- end
 
  def destroy
    @reservation = Reservation.find(params[:id])
@@ -50,7 +38,7 @@ class ReservationsController < ApplicationController
  private
 
   def reservation_params
-    params.permit(:StartDate, :EndDate, :person_num)
+    params.require(:reservation).permit(:StartDate, :EndDate, :person_num)
   end
   
   def room_params
