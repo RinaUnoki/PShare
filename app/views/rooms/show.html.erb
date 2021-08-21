@@ -7,7 +7,7 @@
     </div>
   </div>
 </section>
-
+ 
 <section class="section">
   <div class="container">
     <div class="columns is-centered">
@@ -50,7 +50,36 @@
                 <%= link_to "編集画面へ", edit_room_path(@room), class: "button is-success" %>
               <% end %>
             </div>
-              <%= link_to "予約画面へ", "/reservations/new", class: "button is-success" %>
+        <section class="section">
+        <div class="container">
+         <div class="columns is-centered">
+          <div class="column is-6">
+            <%= form_for @reservation do |f| %>
+           <div class="field">
+            <%= @room.price %>円/日
+           </div>
+          <div class="field">
+            <%= f.label :StartDate, "開始日", class: "label" %>
+            <%= f.date_field :StartDate, class: "input" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :EndDate, "終了日", class: "label" %>
+            <%= f.date_field :EndDate, class: "input" %>
+          </div>
+          
+          <div class="field">
+            <%= f.label :person_num, "人数", class: "label" %>
+            <%= f.number_field :person_num, class: "input" %>
+          </div>
+          <%= f.hidden_field :room_id, value: @room.id %>
+          <%= f.submit '予約確認画面へ', class: "button is-success" %>
+          <% end %>
+
+      </div>
+    </div>
+  </div>
+</section>
           </div>
         </div>
       </div>

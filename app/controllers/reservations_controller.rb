@@ -1,47 +1,49 @@
 class ReservationsController < ApplicationController
-  protect_from_forgery
   
   def index
-   @reservations = Reservation.all
-   @rooms = Room.all
+    
   end
-
+ 
   def new
-   @reservation = Reservation.new
-	 end
-	
-	def complete
-		Reservation.create!(@reservation)
-	end
-	
-	def create
-   @reservation = Reservation.new(reservation_params)
-   @room = Room.find_by(params[:room_id])
-   render "/reservations/show"
- end
-
+    @reservation = Reservation.new
+    @room = Room.find(params[:room_id])
+  end
+ 
+  def create
+  @reservation = Reservation.new(params.require(:reservation).permit(:StartDate, :EndDate, :person_num, :room_id, :user_id))
+  @room = Room.find(params[:room_id])
+  if @reservation.save
+    flash[:notice] = "予約をしました"
+    redirect_to :rooms
+  else
+    render "reservations/show"
+  end
+  end
+ 
   def show
-    if @reservation.invalid?
-			 render :new
-		 end
+    @reservation = Reservation.find(params[:id])
   end
-  
-  
-
- def destroy
-   @reservation = Reservation.find(params[:id])
-   @reservation.destroy
-   flash[:notice] = "予約を削除しました"
-   redirect_to :user_session
- end
-
- private
-
-  def reservation_params
-    params.require(:reservation).permit(:StartDate, :EndDate, :person_num)
+ 
+  def edit
+    @reservation = Reservation.find(params[:id])
   end
-  
-  def room_params
-   params.permit(:price)
+ 
+  def update
+    @reservation = Reservation.find(params[:id])
+    @reservation = Reservation.new(params.require(:reservation).permit(:StartDate, :EndDate, :person_num, :room_id, :user_id))
+  if @reservation.save
+    flash[:notice] = "予約をしました"
+    redirect_to :rooms
+  else
+    render "edit"
   end
+  end
+ 
+  def destroy
+    @reservation = Reservation.find(params[:id])
+    @reservation.destroy
+    flash[:notice] = "投稿を削除しました"
+    redirect_to :rooms
+  end
+
 end

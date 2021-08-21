@@ -1,27 +1,21 @@
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-6">
-        <%= form_for @reservation  do |f| %>
-          <div class="field">
-            <%= f.label :StartDate, "開始日", class: "label" %>
-            <%= f.date_field :StartDate, class: "input" %>
-          </div>
+<h5 class="price-icon">/ 日</h5>
 
-          <div class="field">
-            <%= f.label :EndDate, "終了日", class: "label" %>
-            <%= f.date_field :EndDate, class: "input" %>
-          </div>
-          
-          <div class="field">
-            <%= f.label :person_num, "人数", class: "label" %>
-            <%= f.number_field :person_num, class: "input" %>
-          </div>
-          
-          <%= f.submit '確認画面へ', class: "button is-success" %>
+
+        <div class="reservations-new-date-select">
+          <%= form_for @reservation do |f| %>
+            <%= f.label :StartDate ,"開始日" %>
+            <%= f.text_field :StartDate ,class: "form-control mb-4",:readonly => true %>
+            <%= f.label :EndDate ,"開始日" %>
+            <%= f.text_field :EndDate ,class: "form-control mb-4",:readonly => true %>
+            <h6 class="reservations-new-check-content">使用日数 : <%= (@reservation.EndDate - @reservation.StartDate).to_i %>日</h6>
+            <h6 class="reservations-new-check-content">人数 : <%= @reservation.person_num %>人</h6>
+
+            <%= f.hidden_field :user_id, value: current_user.id %>
+
+
+            <p class="reservations-new-check-content">上記内容でよろしければ「予約を確定」を押してください</p>
+            <input type="submit" name="commit" value="予約を確定" class="btn btn-primary form-control my-3" data-disable-with="予約を確定">
+            <%= f.submit "予約を確定", class: "btn btn-primary form-control my-3" %>
+            <a class="btn btn-secondary form-control" href="/rooms">ルーム詳細に戻る</a>
           <% end %>
-
-      </div>
-    </div>
-  </div>
-</section>
+        </div>

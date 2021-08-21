@@ -40,7 +40,7 @@ class RoomsController < ApplicationController
     end
   end
   
-  private
+  
   def room_params
     params.require(:room).permit(:title, :body, :image, :price, :adress)
   end

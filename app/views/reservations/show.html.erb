@@ -2,12 +2,11 @@
   <div class="hero-body">
     <div class="container">
       <h1 class="title">
-        予約内容確認
+        予約済ルーム
       </h1>
     </div>
   </div>
 </section>
-
 <section class="section">
   <div class="container">
     <div class="columns is-centered">
@@ -16,18 +15,24 @@
           <div class="card-content">
             <div class="media">
               <div class="media-content">
-                <p class="title is-4">￥<%= @room.price %>/日</p>
+                
               </div>
             </div>
             <div class="content">
               <table class="table is-narrow">
                 <tr>
-                  <th>開始日</th>
+                　<th>料金</th>
                 </tr>
                 <tr>
-                  <td><%= @reservation.StartDate %></td>
+                　<td>￥<%= @room.price %>/日</td>
+                </tr>
+              　<tr>
+                　<th>開始日</th>
                 </tr>
                 <tr>
+            　　<td><%= @reservation.StartDate %></td>
+            　　</tr>
+            　　<tr>
                   <th>終了日</th>
                 </tr>
                 <tr>
@@ -46,19 +51,15 @@
                   <td></td>
                 </tr>
               </table>
-              <div class="media">
-                
-                <%= form_for @reservation, method: :post, url:reservations_complete_path do |form| %>
-                <%= form.hidden_field :StartDate %>
-                <%= form.hidden_field :EndDate %>
-                <%= form.hidden_field :person_num %>
-                <%= form.submit "予約する", class: "button is-success" %>
-                <% end %>
-          </div>
+              </div>
         </div>
       </div>
       </article>
       </div>
     </div>
-  </div>
 </section>
+            　　
+            　　
+            　　
+        
+   

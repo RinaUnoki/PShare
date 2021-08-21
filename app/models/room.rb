@@ -2,7 +2,7 @@ class Room < ApplicationRecord
   
   belongs_to :user
   
-  has_many :reservations
+  has_one :reservation
   
   attachment :image
   with_options presence: true do

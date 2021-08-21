@@ -6,22 +6,40 @@
           <strong class="is-size-1" style="font-family: cursive;">PShare</strong>
         </p>
       </div>
-      <div class="columns is-centered">
-        <div class="column is-5">
-          <br>
-          <%= link_to "ログイン", new_user_session_path, class: "button is-warning is-fullwidth" %>
-          <br>
-          <%= link_to "新規登録", new_user_registration_path, class: "button is-warning is-fullwidth" %>
-        </div>
+        
+        <div class="columns is-centered">
+  <h2 class="form-area-title mb-4">Potepan Shareでまだ体験したことのない旅をしよう</h2>
+  <form action="https://presite-potepancamp-rails-02.herokuapp.com/rooms/search" accept-charset="UTF-8" method="get">
+  <br>
+  <input type="text" name="area" id="area" value="" class="" placeholder="東京">
+  <input type="submit" name="commit" value="探す" class: "button is-warning is-fullwidth">
+</form>                    
+</div>
+        
       </div>
     </div>
   </article>
   <br>
+  <h1 class="section-title">おすすめのエリア</h1>
   <div class="columns is-centered">
-    <div class="column">
-      <figure>
-        <div class="main-image"></div>
-      </figure>
-    </div>
-  </div>
+  <div class="row">
+  <div class="panel-item col-lg-3 col-6">
+    <span>東京</span>
+  <a href="https://presite-potepancamp-rails-02.herokuapp.com/rooms/search?area=%E6%9D%B1%E4%BA%AC"><img class="panel-image" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/img_tokyo.jpg"></a>
+<div class="shadow"></div>
+</div>
+<div class="panel-item col-lg-3 col-6">
+    <span>大阪</span>
+ <a href="https://presite-potepancamp-rails-02.herokuapp.com/rooms/search?area=%E5%A4%A7%E9%98%AA"><img class="panel-image" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/img_osaka.jpg"></a>
+<div class="shadow"></div>
+</div>
+<div class="panel-item col-lg-3 col-6">
+    <span>京都</span>
+<a href="https://presite-potepancamp-rails-02.herokuapp.com/rooms/search?area=%E4%BA%AC%E9%83%BD"><img class="panel-image shadow" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/img_kyoto.jpg"></a>
+<div class="shadow"></div>
+                </div>
+<div class="panel-item col-lg-3 col-6">
+    <span>札幌</span>
+<a href="https://presite-potepancamp-rails-02.herokuapp.com/rooms/search?area=%E6%9C%AD%E5%B9%8C"><img class="panel-image" src="https://presite-potepancamp-rails-02.herokuapp.com/assets/img_sapporo.jpg"></a>
+</div>
 </section>
