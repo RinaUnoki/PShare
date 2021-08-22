@@ -1,21 +1,61 @@
-<h5 class="price-icon">/ 日</h5>
-
-
-        <div class="reservations-new-date-select">
-          <%= form_for @reservation do |f| %>
-            <%= f.label :StartDate ,"開始日" %>
-            <%= f.text_field :StartDate ,class: "form-control mb-4",:readonly => true %>
-            <%= f.label :EndDate ,"開始日" %>
-            <%= f.text_field :EndDate ,class: "form-control mb-4",:readonly => true %>
-            <h6 class="reservations-new-check-content">使用日数 : <%= (@reservation.EndDate - @reservation.StartDate).to_i %>日</h6>
-            <h6 class="reservations-new-check-content">人数 : <%= @reservation.person_num %>人</h6>
-
-            <%= f.hidden_field :user_id, value: current_user.id %>
-
-
-            <p class="reservations-new-check-content">上記内容でよろしければ「予約を確定」を押してください</p>
-            <input type="submit" name="commit" value="予約を確定" class="btn btn-primary form-control my-3" data-disable-with="予約を確定">
-            <%= f.submit "予約を確定", class: "btn btn-primary form-control my-3" %>
-            <a class="btn btn-secondary form-control" href="/rooms">ルーム詳細に戻る</a>
-          <% end %>
+<section class="hero is-success">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        入力内容確認
+      </h1>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-7">
+        <div class="card">
+          <div class="card-content">
+            <div class="media">
+              <div class="media-content">
+                <%= form_for @reservation do |f| %>
+              </div>
+            </div>
+            <div class="content">
+              <table class="table is-narrow">
+                内容をご確認の上、「予約を確定」を押してください。
+                <tr>
+                　<th>料金</th>
+                </tr>
+                <tr>
+                　<td>￥<%= @reservation.room.price %>/日</td>
+                </tr>
+              　<tr>
+                　<th>開始日</th>
+                </tr>
+                <tr>
+            　　<td><%= @reservation.StartDate %></td>
+            　　</tr>
+            　　<tr>
+                  <th>終了日</th>
+                </tr>
+                <tr>
+                  <td><%= @reservation.EndDate %></td>
+                </tr>
+                <tr>
+                  <th>人数</th>
+                </tr>
+                <tr>
+                  <td><%= @reservation.person_num %></td>
+                </tr>
+                <tr>
+                  <th>合計金額</th>
+                  <td>¥<%= (@reservation.EndDate - @reservation.StartDate).to_i* @reservation.room.price * @reservation.person_num %>円</td>
+                </tr>
+              </table>
+              <%= f.submit '予約を確定', class: "button is-success" %>
+             <% end %>
+              </div>
         </div>
+      </div>
+      </article>
+      </div>
+    </div>
+</section>
