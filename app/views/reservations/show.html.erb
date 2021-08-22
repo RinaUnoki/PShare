@@ -2,7 +2,7 @@
   <div class="hero-body">
     <div class="container">
       <h1 class="title">
-        入力内容確認
+        予約済ルーム確認
       </h1>
     </div>
   </div>
@@ -15,12 +15,10 @@
           <div class="card-content">
             <div class="media">
               <div class="media-content">
-                <%= form_for @reservation do |f| %>
               </div>
             </div>
             <div class="content">
               <table class="table is-narrow">
-                内容をご確認の上、「予約を確定」を押してください。
                 <tr>
                 　<th>料金</th>
                 </tr>
@@ -50,8 +48,6 @@
                   <td>¥<%= (@reservation.EndDate - @reservation.StartDate).to_i* @reservation.room.price * @reservation.person_num %>円</td>
                 </tr>
               </table>
-              <%= f.submit '予約を確定', class: "button is-success" %>
-             <% end %>
               </div>
         </div>
       </div>

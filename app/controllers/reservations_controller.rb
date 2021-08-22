@@ -1,7 +1,7 @@
 class ReservationsController < ApplicationController
   
   def index
-    
+    @reservation =Reservation.all
   end
  
   def new
@@ -11,14 +11,12 @@ class ReservationsController < ApplicationController
  
   def create
   @reservation = Reservation.new(params.require(:reservation).permit(:StartDate, :EndDate, :person_num, :room_id, :user_id))
-  @room = Room.find_by(params[:room_id])
-  
-  #if @reservation.save
-    #flash[:notice] = "予約をしました"
-    #redirect_to :rooms
-  #else
-    render "reservations/show"
-  #end
+  #@room = Room.find(params[:room_id])
+  render :new
+  if @reservation.save
+    flash[:notice] = "予約をしました"
+    redirect_to :new
+  end
   end
  
   def show
@@ -33,7 +31,7 @@ class ReservationsController < ApplicationController
     @reservation = Reservation.find(params[:id])
     @reservation = Reservation.new(params.require(:reservation).permit(:StartDate, :EndDate, :person_num, :room_id, :user_id))
   if @reservation.save
-    flash[:notice] = "予約をしました"
+    flash[:notice] = "予約内容を変更しました"
     redirect_to :rooms
   else
     render "edit"
@@ -46,5 +44,4 @@ class ReservationsController < ApplicationController
     flash[:notice] = "投稿を削除しました"
     redirect_to :rooms
   end
-
 end

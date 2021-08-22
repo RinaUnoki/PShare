@@ -20,7 +20,7 @@
             </div>
             <div class="content">
               <table class="table is-narrow">
-                内容をご確認の上、「予約を確定」を押してください。
+                内容をご確認の上、よろしければ予約確定ボタンを押してください。
                 <tr>
                 　<th>料金</th>
                 </tr>
@@ -50,7 +50,11 @@
                   <td>¥<%= (@reservation.EndDate - @reservation.StartDate).to_i* @reservation.room.price * @reservation.person_num %>円</td>
                 </tr>
               </table>
-              <%= f.submit '予約を確定', class: "button is-success" %>
+              <%= f.hidden_field :room_id %>
+              <%= f.hidden_field :StartDate %>
+              <%= f.hidden_field :EndDate %>
+              <%= f.hidden_field :person_num %>
+              <%= f.submit '予約確定', class: "button is-success" %>
              <% end %>
               </div>
         </div>
