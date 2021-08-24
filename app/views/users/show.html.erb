@@ -77,7 +77,7 @@
                     </span>
                       このルームを編集する
                     <% end %>
-                    <%= link_to room_path(room), method: :delete, data: {confirm: "削除しますか？"}, class: "panel-block" do %>
+                    <%= button_to room_path(room), method: :delete, data: {confirm: "削除しますか？"}, class: "panel-block" do %>
                     <span class="panel-icon">
                         <i class="fas fa-trash"></i>
                     </span>

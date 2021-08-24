@@ -23,7 +23,7 @@
                 　<th>料金</th>
                 </tr>
                 <tr>
-                　<td>￥<%= @reservation.room.price %>/日</td>
+                　<td>￥<%= @room.price %>/日</td>
                 </tr>
               　<tr>
                 　<th>開始日</th>
@@ -45,9 +45,11 @@
                 </tr>
                 <tr>
                   <th>合計金額</th>
-                  <td>¥<%= (@reservation.EndDate - @reservation.StartDate).to_i* @reservation.room.price * @reservation.person_num %>円</td>
+                  <td>¥<%= (@reservation.EndDate - @reservation.StartDate).to_i* @room.price * @reservation.person_num %>円</td>
                 </tr>
               </table>
+              <%= link_to "内容変更する", edit_reservation_path(@reservation), class: "button is-success" %>
+              <%= button_to "削除", @reservation, method: :delete, data: { confirm: "本当に削除しますか？" }, class: "panel-block" %>
               </div>
         </div>
       </div>
@@ -55,8 +57,3 @@
       </div>
     </div>
 </section>
-            　　
-            　　
-            　　
-        
-   

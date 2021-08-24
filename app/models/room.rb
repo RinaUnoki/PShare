@@ -1,8 +1,8 @@
 class Room < ApplicationRecord
   
-  belongs_to :user
+  belongs_to :user, optional: true
   
-  has_one :reservation
+  has_many :reservations, dependent: :destroy
   
   attachment :image
   with_options presence: true do

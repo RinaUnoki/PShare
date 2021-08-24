@@ -15,7 +15,7 @@
           <div class="card-content">
             <div class="media">
               <div class="media-content">
-                <%= form_for @reservation do |f| %>
+                <%= form_with model: @reservation, url: {controller: 'reservations', action: 'index' } do |f| %>
               </div>
             </div>
             <div class="content">

@@ -1,5 +1,6 @@
 class RoomsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
+ 
   
   def index
     @rooms = Room.all
@@ -40,7 +41,13 @@ class RoomsController < ApplicationController
     end
   end
   
+  def destroy
+    room = Room.find(params[:id])
+    room.destroy
+    redirect_to rooms_path, notice: "ルームを削除しました。"
+  end
   
+  private
   def room_params
     params.require(:room).permit(:title, :body, :image, :price, :adress)
   end

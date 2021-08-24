@@ -6,6 +6,7 @@ class User < ApplicationRecord
   attachment :profile_image
   has_many :reservations, dependent: :destroy
   has_many :rooms, dependent: :destroy
+  
   validates :username, presence: true
   validates :email, presence: true
   validates :password, presence: true

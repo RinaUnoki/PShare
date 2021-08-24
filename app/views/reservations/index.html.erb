@@ -1,33 +1,47 @@
-  <div class="notifications">
-  <% if flash.notice %>
-    <p class="notice"><%= flash.notice %></p>
-  <% end %>
-</div>
-<div class="container-fiuld reservations">
-  <h4 class="pb-4">予約済みルーム一覧</h4>
-  <table>
-        <th>開始日</th>
-        <th>終了日</th>
-        <th>予約確定日時</th>
-        <th>予約キャンセル</th>
-      </tr>
-    </thead>
-    <tbody>
+  <section class="hero is-success">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        予約ルーム履歴
+      </h1>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-multiline">
       <% @reservations.each do |reservation| %>
       <% @rooms.each do |room| %>
-      <tr>
-        <td><%= image_tag room.room_image.to_s,class: "reservations-image" %></td>
-        <td class="posts-name"><%= link_to "#{room.room_name}", room %></td>
-        <td class="posts-content"><%= room.description %></td>
-        <td class="price-icon"><%= reservation.total_price %></td>
-        <td class="price-icon"></td>
-        <td><%= reservation.start_date %></td>
-        <td><%= reservation.end_date %></td>
-        <td><%= reservation.created_at %></td>
-        <td><%= link_to "キャンセル", reservation_path(reservation.id), method: :delete, data: { confirm: "本当に削除しますか？" } %></td>
-      </tr>
+        <div class="column is-4">
+          <div class="card">
+            <div class="card-image">
+              <figure class="image is-4by3">
+                <%= link_to reservation_path(reservation) do %>
+                <%= attachment_image_tag room, :image %>
+                <% end %>
+              </figure>
+            </div>
+            <div class="card-content">
+              <div class="media">
+                <div class="media-left">
+                  <figure class="image is-48x48">
+                   
+                  </figure>
+                </div>
+                <div class="media-content">
+                  <div class="title"></div>
+                </div>
+              </div>
+
+              <div class="content">
+                <time><%= reservation.updated_at.strftime("%Y-%m-%d %H:%M") %></time>更新
+              </div>
+            </div>
+          </div>
+        </div>
       <% end %>
       <% end %>
-    </tbody>
-  </table>
-</div> 
+    </div>
+  </div>
+</section>

@@ -1,7 +1,8 @@
 class ReservationsController < ApplicationController
   
   def index
-    @reservation =Reservation.all
+    @reservations =Reservation.all
+    @rooms = Room.all
   end
  
   def new
@@ -10,17 +11,17 @@ class ReservationsController < ApplicationController
   end
  
   def create
-  @reservation = Reservation.new(params.require(:reservation).permit(:StartDate, :EndDate, :person_num, :room_id, :user_id))
+   @reservation = Reservation.new(reservation_params)
   #@room = Room.find(params[:room_id])
   render :new
   if @reservation.save
-    flash[:notice] = "予約をしました"
-    redirect_to :new
+     return reservations_path(@reservation), notice: "予約をしました"
   end
   end
  
   def show
     @reservation = Reservation.find(params[:id])
+    @room = Room.find_by(params[:room_id])
   end
  
   def edit
@@ -29,19 +30,21 @@ class ReservationsController < ApplicationController
  
   def update
     @reservation = Reservation.find(params[:id])
-    @reservation = Reservation.new(params.require(:reservation).permit(:StartDate, :EndDate, :person_num, :room_id, :user_id))
-  if @reservation.save
-    flash[:notice] = "予約内容を変更しました"
-    redirect_to :rooms
-  else
-    render "edit"
-  end
+  if @reservation.update(reservation_params)
+    redirect_to reservation_path(@reservation), notice: "更新しました。"
+    else
+      render :edit
+    end
   end
  
   def destroy
-    @reservation = Reservation.find(params[:id])
-    @reservation.destroy
-    flash[:notice] = "投稿を削除しました"
-    redirect_to :rooms
+    reservation = Reservation.find(params[:id])
+    reservation.destroy
+    redirect_to reservations_path, notice: "予約を削除しました。"
+  end
+  
+  private
+  def reservation_params
+    params.require(:reservation).permit(:StartDate, :EndDate, :person_num, :room_id, :user_id)
   end
 end

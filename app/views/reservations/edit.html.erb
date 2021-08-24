@@ -1,0 +1,47 @@
+<section class="hero is-success">
+  <div class="hero-body">
+    <div class="container">
+      <h1 class="title">
+        予約内容変更
+      </h1>
+    </div>
+  </div>
+</section>
+
+<% if @reservation.errors.any? %>
+  <div class="notification is-danger">
+    <h2><%= pluralize(@reservation.errors.count, "error") %> prohibited this object from being saved: not successfully</h2>
+    <ul>
+      <% @reservation.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+      <% end %>
+    </ul>
+  </div>
+<% end %>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-6">
+            <%= form_for @reservation do |f| %>
+          <div class="field">
+            <%= f.label :StartDate, "開始日", class: "label" %>
+            <%= f.date_field :StartDate, class: "input" %>
+          </div>
+
+          <div class="field">
+            <%= f.label :EndDate, "終了日", class: "label" %>
+            <%= f.date_field :EndDate, class: "input" %>
+          </div>
+          
+          <div class="field">
+            <%= f.label :person_num, "人数", class: "label" %>
+            <%= f.number_field :person_num, class: "input" %>
+          </div>
+
+          <%= f.submit '変更する', class: "button is-success" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
